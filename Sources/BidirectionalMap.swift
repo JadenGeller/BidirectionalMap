@@ -27,18 +27,23 @@ public struct BidirectionalMap<Left: Hashable, Right: Hashable> {
         return (leftToRightMapping.updateValue(right, forKey: left), rightToLeftMapping.updateValue(left, forKey: right))
     }
     
+    /// Removes the association between `left` and its corresponding `Right` value, if it exists,
+    /// and returns the `Right` value.
     public mutating func disassociateValues(left left: Left) -> Right? {
         guard let right = leftToRightMapping.removeValueForKey(left) else { return nil }
         rightToLeftMapping.removeValueForKey(right)
         return right
     }
     
+    /// Removes the association between `right` and its corresponding `Left` value, if it exists,
+    /// and returns the `Left` value.
     public mutating func disassociateValues(right right: Right) -> Left? {
         guard let left = rightToLeftMapping.removeValueForKey(right) else { return nil }
         leftToRightMapping.removeValueForKey(left)
         return left
     }
     
+    /// Removes all associations.
     public mutating func disassociateAll(keepCapacity keepCapacity: Bool = false) {
         leftToRightMapping.removeAll(keepCapacity: keepCapacity)
         rightToLeftMapping.removeAll(keepCapacity: keepCapacity)
@@ -110,12 +115,14 @@ extension BidirectionalMap: CollectionType {
         return indexForValue(left: left)
     }
     
+    /// Removes the association between values at the given `index`, returning the removed pair.
     public mutating func disassociateAtIndex(index: DictionaryIndex<Left, Right>) -> (Left, Right) {
         let (left, right) = leftToRightMapping.removeAtIndex(index)
         rightToLeftMapping.removeValueForKey(right)
         return (left, right)
     }
     
+    /// If `!self.isEmpty`, remove and return the first left-right pair, otherwise return nil.
     mutating func popFirst() -> (Left, Right)? {
         guard !isEmpty else { return nil }
         return disassociateAtIndex(startIndex)
