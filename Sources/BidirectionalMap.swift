@@ -100,14 +100,14 @@ extension BidirectionalMap: CollectionType {
     }
     
     /// Returns the `Index` for the given `Left` value, or nil if the value is not present in the dictionary.
-    public func indexForLeft(left: Left) -> DictionaryIndex<Left, Right>? {
+    public func indexForValue(left left: Left) -> DictionaryIndex<Left, Right>? {
         return leftToRightMapping.indexForKey(left)
     }
     
     /// Returns the `Index` for the given `Right` value, or nil if the value is not present in the dictionary.
-    public func indexForRight(right: Right) -> DictionaryIndex<Left, Right>? {
+    public func indexForValue(right right: Right) -> DictionaryIndex<Left, Right>? {
         guard let left = getAssociatedValue(right: right) else { return nil }
-        return indexForLeft(left)
+        return indexForValue(left: left)
     }
     
     public mutating func disassociateAtIndex(index: DictionaryIndex<Left, Right>) -> (Left, Right) {
