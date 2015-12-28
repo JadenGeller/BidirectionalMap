@@ -10,27 +10,26 @@ import XCTest
 @testable import BidirectionalMap
 
 class BidirectionalMapTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    let browsers: BidirectionalMap<String, String> = ["Apple" : "Safari", "Google" : "Chrome", "Microsoft" : "Edge", "Mozilla" : "Firefox"]
+
+    func testMapping() {
+        XCTAssertEqual(browsers.getAssociatedValue(left: "Apple"), "Safari")
+        XCTAssertEqual(browsers.getAssociatedValue(right: "Safari"), "Apple")
+        XCTAssertEqual(browsers.getAssociatedValue(left: "Microsoft"), "Edge")
+        XCTAssertEqual(browsers.getAssociatedValue(right: "Edge"), "Microsoft")
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testValues() {
+        XCTAssertEqual(Set(browsers.leftValues), ["Apple", "Google", "Microsoft", "Mozilla"])
+        XCTAssertEqual(Set(browsers.rightValues), ["Safari", "Chrome", "Edge", "Firefox"])
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRemove() {
+        var copy = browsers
+        XCTAssertEqual(copy.disassociateValues(left: "Apple"), "Safari")
+        XCTAssertEqual(copy.getAssociatedValue(left: "Apple"), nil)
+        XCTAssertEqual(copy.getAssociatedValue(right: "Safari"), nil)
+        copy.disassociateAll()
+        XCTAssertTrue(copy.isEmpty)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

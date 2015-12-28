@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D38D0281C30CF97006B79FD /* BidirectionalMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D38D0271C30CF97006B79FD /* BidirectionalMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D38D02F1C30CF97006B79FD /* BidirectionalMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D38D0241C30CF97006B79FD /* BidirectionalMap.framework */; };
 		4D38D0341C30CF97006B79FD /* BidirectionalMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D38D0331C30CF97006B79FD /* BidirectionalMapTests.swift */; };
+		4D38D0411C30DD92006B79FD /* BidirectionalMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D38D0401C30DD92006B79FD /* BidirectionalMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +24,11 @@
 
 /* Begin PBXFileReference section */
 		4D38D0241C30CF97006B79FD /* BidirectionalMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BidirectionalMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D38D0271C30CF97006B79FD /* BidirectionalMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BidirectionalMap.h; sourceTree = "<group>"; };
 		4D38D0291C30CF97006B79FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D38D02E1C30CF97006B79FD /* BidirectionalMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BidirectionalMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D38D0331C30CF97006B79FD /* BidirectionalMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalMapTests.swift; sourceTree = "<group>"; };
 		4D38D0351C30CF97006B79FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D38D0401C30DD92006B79FD /* BidirectionalMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BidirectionalMap.swift; path = Sources/BidirectionalMap.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 		4D38D0261C30CF97006B79FD /* BidirectionalMap */ = {
 			isa = PBXGroup;
 			children = (
-				4D38D0271C30CF97006B79FD /* BidirectionalMap.h */,
+				4D38D0401C30DD92006B79FD /* BidirectionalMap.swift */,
 				4D38D0291C30CF97006B79FD /* Info.plist */,
 			);
 			path = BidirectionalMap;
@@ -93,7 +93,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D38D0281C30CF97006B79FD /* BidirectionalMap.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D38D0411C30DD92006B79FD /* BidirectionalMap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +305,7 @@
 		4D38D0391C30CF97006B79FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -317,12 +318,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.BidirectionalMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4D38D03A1C30CF97006B79FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -379,6 +382,7 @@
 				4D38D03A1C30CF97006B79FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4D38D03B1C30CF97006B79FD /* Build configuration list for PBXNativeTarget "BidirectionalMapTests" */ = {
 			isa = XCConfigurationList;
@@ -387,6 +391,7 @@
 				4D38D03D1C30CF97006B79FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
