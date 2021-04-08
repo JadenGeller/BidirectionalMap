@@ -23,13 +23,13 @@ public struct BidirectionalMap<Left: Hashable, Right: Hashable> {
     
     /// Associates `left` with `right`, removing the previous associations of the values from the mapping and returning
     /// a tuple of these associations.
-    public mutating func associateValues(left: Left, _ right: Right) -> (Right?, Left?) {
+    @discardableResult public mutating func associateValues(left: Left, _ right: Right) -> (Right?, Left?) {
         return (leftToRightMapping.updateValue(right, forKey: left), rightToLeftMapping.updateValue(left, forKey: right))
     }
     
     /// Removes the association between `left` and its corresponding `Right` value, if it exists,
     /// and returns the `Right` value.
-    public mutating func disassociateValues(left: Left) -> Right? {
+    @discardableResult public mutating func disassociateValues(left: Left) -> Right? {
         guard let right = leftToRightMapping.removeValue(forKey: left) else { return nil }
         rightToLeftMapping.removeValue(forKey: right)
         return right
@@ -37,7 +37,7 @@ public struct BidirectionalMap<Left: Hashable, Right: Hashable> {
     
     /// Removes the association between `right` and its corresponding `Left` value, if it exists,
     /// and returns the `Left` value.
-    public mutating func disassociateValues(right: Right) -> Left? {
+    @discardableResult public mutating func disassociateValues(right: Right) -> Left? {
         guard let left = rightToLeftMapping.removeValue(forKey: right) else { return nil }
         leftToRightMapping.removeValue(forKey: left)
         return left
@@ -71,12 +71,30 @@ public struct BidirectionalMap<Left: Hashable, Right: Hashable> {
     
     /// Obtain the associated `Right` value given a `Left` value, or `nil` if the mapping doesn't exist.
     public subscript(left: Left) -> Right? {
-        return getAssociatedValue(left: left)
+        get {
+            return getAssociatedValue(left: left)
+        }
+        set {
+            if let newValue = newValue {
+                associateValues(left: left, newValue)
+            } else {
+                disassociateValues(left: left)
+            }
+        }
     }
     
     /// Obtain the associated `Left` value given a `Right` value, or `nil` if the mapping doesn't exist.
     public subscript(right: Right) -> Left? {
-        return getAssociatedValue(right: right)
+        get {
+            return getAssociatedValue(right: right)
+        }
+        set {
+            if let newValue = newValue {
+                associateValues(left: newValue, right)
+            } else {
+                disassociateValues(right: right)
+            }
+        }
     }
 }
 
